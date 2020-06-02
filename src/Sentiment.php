@@ -22,10 +22,10 @@ class Sentiment
 
     private function getDataSet(){
 
-        $labels = json_decode(file_get_contents("english_labels.json"),true);
-        $emojis = json_decode(file_get_contents("emoji.json"),true);
+        $labels = json_decode(file_get_contents(__DIR__ . "/english_labels.json"),true);
+        $emojis = json_decode(file_get_contents(__DIR__ . "/emoji.json"),true);
         $dataSet['labels'] = array_merge($labels, $emojis);
-        $dataSet['negators'] = json_decode(file_get_contents("negators.json"), true);
+        $dataSet['negators'] = json_decode(file_get_contents(__DIR__ . "/negators.json"), true);
 
         return $dataSet;
     }
