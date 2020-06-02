@@ -1,8 +1,8 @@
-##Php Sentiment Analysis
+## Php Sentiment Analysis
 
 Install via Composer
 
-####Using Composer (Recommended)
+### Using Composer (Recommended)
 
 You can run the following command in the root directory of your project:
 
