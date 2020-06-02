@@ -1,0 +1,19 @@
+{
+    "name": "otifsolutions/php-sentiment-analysis",
+    "description": "Php Sentiment Analysis allows user to analyze sentiments from a text statement",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "OTIF Solutions",
+            "email": "contact@otif-solutions.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+  "autoload": {
+    "psr-4": {
+      "OTIFSolutions\\PhpSentimentAnalysis\\": "src/"
+    }
+  }
+}
