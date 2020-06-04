@@ -2,11 +2,19 @@
 
 namespace OTIFSolutions\PhpSentimentAnalysis;
 
+/**
+ * Class Sentiment
+ * @package OTIFSolutions\PhpSentimentAnalysis
+ */
 class Sentiment
 {
 
+    /**
+     * @param $value
+     * @return array
+     */
     private function getTokens($value){
-        $tokens = explode(" ",
+        return explode(" ",
             trim(
                 preg_replace('!\s+!', ' ',
                     preg_replace("/[^A-Za-z0-9\-]/"," ",
@@ -17,19 +25,25 @@ class Sentiment
                 )
             )
         );
-        return $tokens;
     }
 
+    /**
+     * @return array
+     */
     private function getDataSet(){
-
-        $labels = json_decode(file_get_contents(__DIR__ . "/english_labels.json"),true);
-        $emojis = json_decode(file_get_contents(__DIR__ . "/emoji.json"),true);
-        $dataSet['labels'] = array_merge($labels, $emojis);
-        $dataSet['negators'] = json_decode(file_get_contents(__DIR__ . "/negators.json"), true);
-
-        return $dataSet;
+        return [
+            'labels' => array_merge(
+                json_decode(file_get_contents(__DIR__ . "/english_labels.json"),true),
+                json_decode(file_get_contents(__DIR__ . "/emoji.json"),true)
+            ),
+            'negators' => json_decode(file_get_contents(__DIR__ . "/negators.json"), true)
+        ];
     }
 
+    /**
+     * @param $value
+     * @return false|array
+     */
     public function analyze($value){
 
         $dataSet = $this->getDataSet();
@@ -38,7 +52,6 @@ class Sentiment
 
         $score = 0;
         $skip = false;
-        $words = [];
         $positive = [];
         $negative = [];
         $calculation = [];
@@ -55,7 +68,6 @@ class Sentiment
                     $token = $combine;
                 }
             }
-            $words[] = $token;
             if(!$skip){
                 $tokenScore = isset($dataSet['labels'][$token])? $dataSet['labels'][$token] : 0;
                 if ($i > 0) {
@@ -71,15 +83,14 @@ class Sentiment
             $calculation[] = [ $token => $tokenScore ];
         }
 
-        return json_encode([
+        return [
             'score' => $score,
             'comparative' => sizeof($tokens) > 0 ? $score / sizeof($tokens) : 0,
             'calculation' => $calculation,
             'tokens' => $tokens,
-            'words' => $words,
             'positive' => $positive,
             'negative' => $negative
-        ]);
+        ];
     }
 
 }
