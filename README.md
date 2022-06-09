@@ -26,12 +26,12 @@ composer require otifsolutions/php-sentiment-analysis
 
 + __We use following methods__
   
-  + `getTokens` method
+  + `getTokens`
     - This method separate the words from the given statement and returns all words.
   
-  + `getDataSet` method
+  + `getDataSet`
     - This method has dataset.
-    - Labels, emojis and negators are stored in the dataset, which have a positive or negative value.
+    - Labels, emojis and negators already stored in the dataset, which have a positive or negative value.
     - For example  `"fun": 4, "funeral": -1,`
 
 This example demonstrates the usage of `Php Sentiment Analysis`,
